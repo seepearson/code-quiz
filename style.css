@@ -1,6 +1,7 @@
 body{
     font-size: 20px;
     font-family: monospace;
+    background-color: lavender;
 }
 
 #container{
@@ -13,18 +14,19 @@ body{
     position: relative;
 }
 #start{
-    font-size: 1.5em;
+    font-size: 3em;
     font-weight: bolder;
     word-break: break-all;
-    width:100px;
-    height:150px;
-    border : 2px solid lightgrey;
+    width:250px;
+    height:250px;
+    border : 2px solid grey;
     text-align: center;
     cursor: pointer;
     position: absolute;
-    left:300px;
-    top:50px;
-    color : lightgrey;
+    left:150px;
+    top:100px;
+    color : black;
+    background-color: lightgoldenrodyellow;
 }
 #start:hover{
     border: 3px solid lightseagreen;
@@ -46,13 +48,14 @@ body{
     float:left;
 }
 
-#question{
-    width:1000px;
+#questionSpot{
+    width:500px;
     height : 125px;
     position: absolute;
     right:0;
     top:0;
     float:left;
+    font-size: 30px;
 }
 #question p{
     margin : 10;
@@ -65,7 +68,7 @@ body{
     width : 480px;
     position: absolute;
     right : 0;
-    top : 125px;
+    top : 225px;
     padding : 10px
 }
 .choice{

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Quiz</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" type="text/css">
 
 
 </head>
@@ -15,7 +15,7 @@
         <div id="start">Start Quiz!</div>
         <div id="quiz" style="display: none">
             <div id="qImg"> </div>
-            <div id="qImg1"> </div>
+            
             <div id="timer">
                 <div id="counter">  </div>
                 <div id="btimeGauge"></div>
@@ -23,16 +23,16 @@
             </div>
             <div id=questionSpot></div>
             <div id="choices">
-                <div class="choice" id="A" onclick="checkAnswer('A')"> A </div>
-                <div class="choice" id="B" onclick="checkAnswer('B')"> B </div>
-                <div class="choice" id="C" onclick="checkAnswer('C')"> C </div>
+                <div class="choice" id="A" onclick="checkAnswer('A')"></div>
+                <div class="choice" id="B" onclick="checkAnswer('B')"></div>
+                <div class="choice" id="C" onclick="checkAnswer('C')"></div>
             </div>
 
             <div id="progress">
-                
+                <div id="prog"></div>
 
             <div id="storeContainer" style="display: none;"> </div>
-<script src="script.js"></script>
+<script src="script.js"> </script>
 </body>
 
 </html>
