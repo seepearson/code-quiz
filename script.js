@@ -3,7 +3,7 @@
 const start = document.getElementById("start");
 const quiz = document.getElementById("quiz");
 const qImg = document.getElementById("qImg");
-
+const img = document.getElementById("img");
 const question = document.getElementById("questionSpot");
 const counter = document.getElementById("counter");
 const timeGauge = document.getElementById("timeGauge");
@@ -11,9 +11,11 @@ const timeGauge = document.getElementById("timeGauge");
 const choiceA = document.getElementById("A");
 const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
-const progress = document.getElementById("progress")
-const scoreDiv = document.getElementById("scoreContainer")
-//const checkAnswer = document.getElementById("checkAnswer")
+const progress = document.getElementById("progress");
+const scoreDiv = document.getElementById("scoreContainer");
+const scoreInitals = document.getElementById("scoreInitals");
+const nextSlide = document.getElementById("nextSlide")
+
 
 //quiz questions
 var questions = [
@@ -73,26 +75,26 @@ var questions = [
     },
 
     {
-        question: "In the following image, what is the value in this variable syntax? ",
-        imgSrc: "assets/var-property.png ",
-        choiceA: "Snow White",
-        choiceB: "var",
-        choiceC: "name ",
+        question: "What is the function of a rubber duck?",
+        imgSrc: "https://cdn.shopify.com/s/files/1/0604/4801/products/SG-REYTD-JCNYO_1024x1024_clipped_rev_1-min.jpeg?v=1505504539://townsquare.media/site/622/files/2012/11/duckbulbasaur.jpg",
+        choiceA: "To yell at it",
+        choiceB: "To be cute",
+        choiceC: "It's the one. It makes bathtime lots of fun.",
         correct: "A"
     },
 
     {
-        question: "In the following image which animal has the index of 2? ",
-        imgSrc: "assets/array.png ",
-        choiceA: "Rhino ",
-        choiceB: "Giraffe",
-        choiceC: "Owl ",
+        question: "Where do you turn in assignments for bootcamp?",
+        imgSrc: "https://static1.squarespace.com/static/56c48e10cf80a1474d506114/5d56bbfb84b79300019f757e/5d56bc0a3df6e90001185bd1/1565992444073/stress-help-300x200.jpeg?format=1500w",
+        choiceA: "Github",
+        choiceB: "Bootcamp Spot",
+        choiceC: "What Assignments are you talking about? ",
         correct: "B"
     },
 
     {
         question: "What's David's favorite song?",
-        imgSrc: "https://hackernoon.com/drafts/lovb2b7g.png ",
+        imgSrc: "assets/music.jpeg",
         choiceA: " The Wii soundtrack ",
         choiceB: "Don't Stop Believing",
         choiceC: "No music. He hates music",
@@ -112,7 +114,7 @@ var questions = [
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
 let count = 0;
-const questionTime = 5; //30 seconds
+const questionTime = 10; //10 seconds
 const gaugeWidth = 150; //150px
 const gaugeUnit = gaugeWidth / questionTime;
 let timer;
@@ -144,85 +146,88 @@ function startQuiz() {
 
 
 
-    //renderProgress
-    function renderProgress() {
-        for (let qIndex = 0; qIndex <= lastQuestion; qIndex++) {
-            progress.innerHTML += "<div class='prog' id=" + qIndex + "> </div>";
-        }
+//renderProgress
+function renderProgress() {
+    for (let qIndex = 0; qIndex <= lastQuestion; qIndex++) {
+        progress.innerHTML += "<div class='prog' id=" + qIndex + "> </div>";
     }
+}
 
 
-    // Counter Render
+// Counter Render
 
-    function renderCounter() {
-        if (count <= questionTime) {
-            counter.innerHTML = count;
-            timeGauge.style.width = count * gaugeUnit + "px";
-            count++;
-        } else {
-            count = 0;
-            //change progress to red 
-            answerIsWrong();
-            if (runningQuestion < lastQuestion) {
-                runningQuestion++;
-                renderQuestion();
-            } else {
-                //end the quiz and show score
-                clearInterval(timer);
-                scoreRender();
-            }
-        }
-    }
-
-    //check answer
-    function checkAnswer(answer) {
-        if (answer == questions[runningQuestion].correct) {
-            // answer is correct
-            score++;
-            // change progress color to green
-            answerIsCorrect();
-        } else {
-            // answer is wrong
-            // change progress color to red
-            answerIsWrong();
-        }
+function renderCounter() {
+    if (count <= questionTime) {
+        counter.innerHTML = count;
+        timeGauge.style.width = count * gaugeUnit + "px";
+        count++;
+    } else {
         count = 0;
+        //change progress to red 
+        answerIsWrong();
         if (runningQuestion < lastQuestion) {
             runningQuestion++;
             renderQuestion();
         } else {
-            // end the quiz and show the score
+            //end the quiz and show score
             clearInterval(timer);
             scoreRender();
         }
     }
+}
 
-    // answer is correct
-    function answerIsCorrect() {
-        document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
+//check answer
+function checkAnswer(answer) {
+    if (answer == questions[runningQuestion].correct) {
+        // answer is correct
+        score++;
+        // change progress color to green
+        answerIsCorrect();
+    } else {
+        // answer is wrong
+        // change progress color to red
+        answerIsWrong();
     }
-
-    // answer is Wrong
-    function answerIsWrong() {
-        document.getElementById(runningQuestion).style.backgroundColor = "#f00";
+    count = 0;
+    if (runningQuestion < lastQuestion) {
+        runningQuestion++;
+        renderQuestion();
+    } else {
+        // end the quiz and show the score
+        clearInterval(timer);
+        scoreRender();
     }
-    //score render
-    function scoreRender(){
-        scoreDiv.style.display = "block";
+}
 
-        //calculate the amount of question percent by the user
+// answer is correct
+function answerIsCorrect() {
+    document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
+}
 
-        const scorePerCent = Math.round(100 * score/questions.length);
+// answer is Wrong
+function answerIsWrong() {
+    document.getElementById(runningQuestion).style.backgroundColor = "#f00";
+}
+//score render
+function scoreRender() {
+    scoreDiv.style.display = "block";
 
-        //chose the image based on percent
-        let img = (scorePerCent >= 80) ? "https://i.ebayimg.com/images/g/5qgAAOSwoBtW3zvq/s-l400.jpg" :
-            (scorePerCent >= 60) ? "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSlaFNdANxQjREEGlQhwhmnAzdXkr_sSrmope466emjc6q_7oXY" :
-                (scorePerCent >= 40) ? "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fpeopledotcom.files.wordpress.com%2F2018%2F05%2F21042210_264995290674140_8840525631411191808_n.jpg&w=400&c=sc&poi=face&q=85" :
-                    (scorePerCent >= 20) ? "https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/4142262/910/607/m2/fpnw/wm1/cjpssheik3b7ggtxtbvychls64ge8jymz64welljjkt75dgkkjdyid33tb4ujlx0-.jpg?1521200767&s=72617cb8c2facefdada31d614c2f9ef4" :
-                        "homework-4/assets/cute-cats.jpeg";
+    //calculate the amount of question percent by the user
+
+    const scorePerCent = Math.round(100 * score / questions.length);
+
+    //choose the image based on percent
+    let img = (scorePerCent >= 80) ? "https://i.ebayimg.com/images/g/5qgAAOSwoBtW3zvq/s-l400.jpg" :
+        (scorePerCent >= 60) ? "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSlaFNdANxQjREEGlQhwhmnAzdXkr_sSrmope466emjc6q_7oXY" :
+            (scorePerCent >= 40) ? "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fpeopledotcom.files.wordpress.com%2F2018%2F05%2F21042210_264995290674140_8840525631411191808_n.jpg&w=400&c=sc&poi=face&q=85" :
+                (scorePerCent >= 20) ? "assets/Gumpy-Cat.jpeg" :
+                    (scorePerCent >= 0) ? "assets/cat-musical.webp" :
 
 
-        scoreDiv.innerHTML = "<img src=" + img + ">";
-        scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
-    }
+                scoreDiv.innerHTML = "<img src=" + img + ">";
+                scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
+
+    var scoreInitals = prompt("Please enter your initals")
+   console.log(scoreInitals, scorePerCent);
+}
 
