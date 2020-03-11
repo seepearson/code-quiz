@@ -220,14 +220,16 @@ function scoreRender() {
     let img = (scorePerCent >= 80) ? "https://i.ebayimg.com/images/g/5qgAAOSwoBtW3zvq/s-l400.jpg" :
         (scorePerCent >= 60) ? "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSlaFNdANxQjREEGlQhwhmnAzdXkr_sSrmope466emjc6q_7oXY" :
             (scorePerCent >= 40) ? "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fpeopledotcom.files.wordpress.com%2F2018%2F05%2F21042210_264995290674140_8840525631411191808_n.jpg&w=400&c=sc&poi=face&q=85" :
-                (scorePerCent >= 20) ? "assets/Gumpy-Cat.jpeg" :
-                    (scorePerCent >= 0) ? "assets/cat-musical.webp" :
+                (scorePerCent >= 20) ? "/assets/Gumpy-Cat.jpeg" :
+                    (scorePerCent >= 0) ? "/assets/cat-musical.webp" : null;
 
 
-                scoreDiv.innerHTML = "<img src=" + img + ">";
-                scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
+                    scoreDiv.innerHTML =  "<img src=" + img + ">";
+                    scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
 
     var scoreInitals = prompt("Please enter your initals")
-   console.log(scoreInitals, scorePerCent);
+    console.log(scoreInitals, scorePerCent);
+
+
 }
 
