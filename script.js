@@ -220,8 +220,8 @@ function scoreRender() {
     let img = (scorePerCent >= 80) ? "https://i.ebayimg.com/images/g/5qgAAOSwoBtW3zvq/s-l400.jpg" :
         (scorePerCent >= 60) ? "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSlaFNdANxQjREEGlQhwhmnAzdXkr_sSrmope466emjc6q_7oXY" :
             (scorePerCent >= 40) ? "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fpeopledotcom.files.wordpress.com%2F2018%2F05%2F21042210_264995290674140_8840525631411191808_n.jpg&w=400&c=sc&poi=face&q=85" :
-                (scorePerCent >= 20) ? "/assets/Gumpy-Cat.jpeg" :
-                    (scorePerCent >= 0) ? "/assets/cat-musical.webp" : null;
+                (scorePerCent >= 20) ? "https://images.beano.com/store/3cfd5493c801924a61d50cd3fd9e520ed16054a8ec95efa4a237775bfc2a?auto=compress&fm=jpg&rect=0%2C0%2C1280%2C720&w=400" :
+                    (scorePerCent >= 0) ? "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AAEx7y3.img?h=350&w=624&m=6&q=60&u=t&o=t&l=f&f=jpg&x=488&y=401" : null;
 
 
                     scoreDiv.innerHTML =  "<img src=" + img + ">";
